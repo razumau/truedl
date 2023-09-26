@@ -6,3 +6,5 @@ gemspec
 
 gem "rake"
 gem "minitest"
+
+gem "standard", "~> 1.31"

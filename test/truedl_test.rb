@@ -63,22 +63,22 @@ class TrueDLTest < Minitest::Test
 
   def test_truedl_for_tournament
     teams_a = [
-      { points: 7, ranking: 500 },
-      { points: 6, ranking: 1500 },
-      { points: 6, ranking: 750 },
-      { points: 3, ranking: 1500 },
-      { points: 3, ranking: 500 },
-      { points: 3, ranking: 500 },
-      { points: 2, ranking: 5500 }
+      {points: 7, ranking: 500},
+      {points: 6, ranking: 1500},
+      {points: 6, ranking: 750},
+      {points: 3, ranking: 1500},
+      {points: 3, ranking: 500},
+      {points: 3, ranking: 500},
+      {points: 2, ranking: 5500}
     ]
 
     assert_in_delta 8.36, TrueDL.true_dl_for_tournament(teams: teams_a, number_of_questions: 36), 0.01
 
     teams_b = [
-      { points: 22, ranking: 150 },
-      { points: 16, ranking: 2500 },
-      { points: 13, ranking: 750 },
-      { points: 8, ranking: 1500 }
+      {points: 22, ranking: 150},
+      {points: 16, ranking: 2500},
+      {points: 13, ranking: 750},
+      {points: 8, ranking: 1500}
     ]
 
     assert_in_delta 4.14, TrueDL.true_dl_for_tournament(teams: teams_b, number_of_questions: 36), 0.01

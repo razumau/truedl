@@ -20,7 +20,6 @@ module TrueDL
     when 1001..2000 then 0.6
     when 2001..3000 then 0.43
     when 3001..5000 then 0.31
-    else nil
     end
   end
 
