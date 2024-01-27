@@ -7,3 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2024-01-27
+
+### Added
+
+- Ruby 3.3 tests
+
+## [0.1.0] - 2023-09-30
+
+Initial release
