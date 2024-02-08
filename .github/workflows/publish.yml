@@ -2,8 +2,9 @@ name: Publish gem to RubyGems.org
 
 on:
   push:
-    tags:
-      - v*
+    branches: main
+    paths: lib/**/version.rb
+  workflow_dispatch:
 
 jobs:
   publish:
