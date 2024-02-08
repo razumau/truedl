@@ -10,7 +10,7 @@ jobs:
   publish:
     name: Publish gem to RubyGems.org
     runs-on: ubuntu-latest
-
+    environment: rubygems-publish
     permissions:
       id-token: write
       contents: write
