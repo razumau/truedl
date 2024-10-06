@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary = "Ruby implementation of TrueDL."
   spec.homepage = "https://github.com/razumau/truedl"
   spec.license = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 3.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.1")
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 

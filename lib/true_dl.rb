@@ -2,10 +2,14 @@
 
 require_relative "truedl/version"
 
+# Formula for TrueDL is described in this post: https://pecheny.me/blog/truedl/
 module TrueDL
-  ##
-  # Formula for TrueDL is described in this post: https://pecheny.me/blog/truedl/
-  #
+  TeamDL = Data.define(:id, :dl) do
+    def ==(other)
+      id == other.id && (dl - other.dl).abs < 0.001
+    end
+  end
+
   # @param [Integer, Float] place
   # @return [Float, nil]
   def self.coefficient_for_place(place)
@@ -35,19 +39,31 @@ module TrueDL
     (1 - [team_points / coefficient_for_place(team_ranking), number_of_questions].min / number_of_questions) * 10
   end
 
+  # Returns an array of TrueDL values for all teams
+  #
+  # @param [Array] teams: list of hashes with `id`, `points` and `ranking`: `{ id: 1,  points: 28, ranking: 22 }`
+  # @param [Integer] number_of_questions
+  # @return [Array<TeamTrueDl>]
+  def self.true_dls_for_tournament(teams:, number_of_questions:)
+    teams.map do |team|
+      dl = truedl_for_team(team_points: team[:points], team_ranking: team[:ranking], number_of_questions:)
+      next if dl.nil?
+
+      TeamDL.new(id: team[:id], dl:)
+    end.compact
+  end
+
   # Calculates TrueDL for a tournament: an average of all non-nil team TrueDLs.
   # Might be nil for tournaments where all teams are ranked below top 5000.
   #
-  # @param [Array] teams: list of hashes with `points` and `ranking`, e.g., `{ points: 28, ranking: 22 }`
+  # @param [Array] teams: list of hashes with `id`, `points` and `ranking`: `{ id: 1,  points: 28, ranking: 22 }`
   # @param [Integer] number_of_questions
   # @return [Float, nil]
   def self.true_dl_for_tournament(teams:, number_of_questions:)
-    dls = teams.map do |team|
-      truedl_for_team(team_points: team[:points], team_ranking: team[:ranking], number_of_questions:)
-    end.compact
+    dls = true_dls_for_tournament(teams:, number_of_questions:)
 
     return if dls.empty?
 
-    dls.sum / dls.size
+    dls.map(&:dl).sum / dls.size
   end
 end
